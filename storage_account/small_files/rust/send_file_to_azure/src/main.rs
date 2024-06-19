@@ -119,7 +119,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("Failed to upload file.");
         println!("Status code: {}", response.status());
     }
-    println!("Response: {:?}", response.text().await?);
+    // println!("Response: {:?}", response.text().await?);
 
     Ok(())
 }
