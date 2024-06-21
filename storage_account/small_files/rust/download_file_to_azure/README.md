@@ -48,7 +48,7 @@ To use the program, follow these steps:
     ACCOUNT_KEY='' \
     CONTAINER_NAME='' \
     BLOB_NAME='' \
-    FILE_PATH='' \
+    DOWNLOAD_PATH='' \
     cargo run
    ```
 

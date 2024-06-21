@@ -13,7 +13,7 @@
 ####################################
 
 # Add the following line to the crontab to run the script every 12:35 hours:
-# 35 12 * * * ACCOUNT_NAME='' ACCOUNT_KEY='' CONTAINER_NAME='' $HOME/Documents/Scripts/a/script.sh
+# 35 12 * * * ACCOUNT_NAME='' ACCOUNT_KEY='' CONTAINER_NAME='' POSTGRES_URL='' $HOME/Documents/Scripts/a/script.sh &>> $HOME/Documents/Scripts/a/script.log
 
 # Dump the PostgreSQL database and compress it using zstd
 timestamp=$(date -u +"%Y-%m-%d_%H:%M:%S")
@@ -25,6 +25,7 @@ compressed_file_name="temp_file_$timestamp.sql.zst"
 # The compressed file will be stored in this directory during the backup process.
 compressed_file="/dev/shm/$compressed_file_name"
 
+echo $timestamp
 echo "Dumping the PostgreSQL database and compressing it using zstd..."
 time pg_dump --dbname=$POSTGRES_URL | zstd -1 -o "$compressed_file"
 
@@ -32,6 +33,10 @@ time pg_dump --dbname=$POSTGRES_URL | zstd -1 -o "$compressed_file"
 echo "Sending the compressed file to the Azure storage account..."
 time BLOB_NAME="$compressed_file_name" \
 FILE_PATH="$compressed_file" \
+ACCOUNT_NAME="$ACCOUNT_NAME" \
+ACCOUNT_KEY="$ACCOUNT_KEY" \
+CONTAINER_NAME="$CONTAINER_NAME" \
+POSTGRES_URL="$POSTGRES_URL" \
 ./target/release/send_file_to_azure
 
 # Remove the temporary compressed file

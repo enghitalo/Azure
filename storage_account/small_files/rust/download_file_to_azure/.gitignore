@@ -1,0 +1,33 @@
+# Ignore compiled binaries
+/target/
+
+# Ignore IDE and editor files
+.idea/
+.vscode/
+
+# Ignore system and temporary files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore build artifacts
+*.o
+*.a
+*.so
+
+# Ignore dependencies
+/node_modules/
+/vendor/
+
+# Ignore generated files
+/generated/
+
+# Ignore sensitive or private information
+secrets.txt
+config.ini
+
+
+.env
+downloaded_file
