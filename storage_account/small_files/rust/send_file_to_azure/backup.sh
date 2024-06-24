@@ -31,13 +31,14 @@ time pg_dump --dbname=$POSTGRES_URL | zstd -1 -o "$compressed_file"
 
 # Set the correct BLOB_NAME and FILE_PATH
 echo "Sending the compressed file to the Azure storage account..."
-time BLOB_NAME="$compressed_file_name" \
-FILE_PATH="$compressed_file" \
-ACCOUNT_NAME="$ACCOUNT_NAME" \
-ACCOUNT_KEY="$ACCOUNT_KEY" \
-CONTAINER_NAME="$CONTAINER_NAME" \
-POSTGRES_URL="$POSTGRES_URL" \
-./target/release/send_file_to_azure
+# cargo run -- <account_name> <account_key> <container_name> <blob_name> <file_path>
+time ./target/release/send_file_to_azure \
+"$ACCOUNT_NAME" \
+"$ACCOUNT_KEY" \
+"$CONTAINER_NAME" \
+"$BLOB_NAME" \
+"$FILE_PATH"
+
 
 # Remove the temporary compressed file
 rm "$compressed_file"

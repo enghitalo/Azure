@@ -42,14 +42,19 @@ To use the program, follow these steps:
 
    For example, you can run the program with the following command:
 
+```sh
+cargo build --release --target=x86_64-unknown-linux-gnu
+cargo build --release --target=x86_64-pc-windows-gnu
+cargo build --release --target=x86_64-pc-windows-msvc
+```
    ```sh
-   cargo build --release &&
-    ACCOUNT_NAME='' \
-    ACCOUNT_KEY='' \
-    CONTAINER_NAME='' \
-    BLOB_NAME='' \
-    FILE_PATH='' \
-    cargo run
+   cargo build --release --target=x86_64-unknown-linux-gnu &&
+   ACCOUNT_NAME='' \
+   ACCOUNT_KEY='' \
+   CONTAINER_NAME='' \
+   BLOB_NAME='' \
+   FILE_PATH='' \
+   cargo run
    ```
 
    Make sure to replace `$FILE_PATH`, `$CONTAINER_NAME`, and `$BLOB_NAME` with the actual values.
@@ -100,3 +105,8 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+
+
+cargo run -- <account_name> <account_key> <container_name> <blob_name> <file_path>
+
+./target/x86_64-unknown-linux-gnu/release/send_file_to_azure "" "" "" "batata.txt" "./batata.txt"
